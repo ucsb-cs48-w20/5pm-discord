@@ -5,6 +5,7 @@ const fs = require("fs");
 
 
 const bot = new Discord.Client();
+const prefix = botconfig.prefix;
 
 bot.commands = new Discord.Collection();
 
@@ -14,30 +15,41 @@ fs.readdir("./commands/", (err, files) => {
         console.log(err);
     }
 
-    let jsfile = files.filter(f => f.split(".").pop() === "js");
+    const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-    if(jsfile.length <= 0){
+    if(commandFiles.length <= 0){
         console.log("Couldn't find commands.");
         return;
     }
 
-    jsfile.forEach((f, i) =>{
-        let props = require(`./commands/${f}`);
-        console.log(`${f} loaded!`);
-        bot.commands.set(props.help.name, props);
-    });
-});
+    for (const file of commandFiles) {
+        const command = require(`./commands/${file}`);
 
+        console.log(`${file} loaded!`);
+
+        bot.commands.set(command.help.name, command);
+    }
+});
 
 bot.on('ready', async () => {
     console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
-    bot.user.setActivity("?help", {type: "Bot being developed!"});
+    await bot.user.setActivity("?help", {type: "Bot being developed!"});
 });
 
-bot.on('message', async msg => {
-    if (msg.content === 'ping') {
-        msg.reply('pong');
-        msg.channel.send('pong');
+bot.on('message',  async message => {
+
+    const args = message.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    if (!bot.commands.has(command)) return;
+
+    try {
+        bot.commands.get(command).run(bot,message,args);
+    } catch (error) {
+        console.error(error);
+        await message.reply('there was an error trying to execute that command!');
     }
+
 });
+
 bot.login(TOKEN.value);
