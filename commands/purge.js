@@ -12,12 +12,12 @@ module.exports.run = async (bot, message, args) => {
         return message.reply('Please specify the number of messages to clear `ex: ?purge 10`');
     }
     message.channel.fetchMessages({
-        limit: messagecount
+        limit: messagecount+1
     }).then(messages => message.channel.bulkDelete(messages));
 
     message.channel.send(messagecount + " Messages Deleted.")
         .then(msg => {
-            msg.delete()
+            msg.delete(2750)
         });
 
     if (message.content.startsWith(config.prefix + 'purge')) message.delete()
