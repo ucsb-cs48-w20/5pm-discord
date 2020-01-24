@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
         return message.reply('Please specify the number of messages to clear `ex: ?purge 10`');
     }
     message.channel.fetchMessages({
-        limit: messagecount+1
+        limit: messagecount
     }).then(messages => message.channel.bulkDelete(messages));
 
     message.channel.send(messagecount + " Messages Deleted.")
