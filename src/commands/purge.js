@@ -8,8 +8,17 @@ module.exports.run = async (bot, message, args) => {
     if(!message.member.hasPermission('MANAGE_MESSAGES')){
         return errors.noPerms(message, "Manage messages");
     }
+    if (messagecount > 100) {
+        return message.reply('you can only delete at most 100 messages at a time.')
+            .then(msg => {
+                msg.delete(2750)
+            });;
+    }
     if (isNaN(messagecount)) {
-        return message.reply('Please specify the number of messages to clear `ex: ?purge 10`');
+        return message.reply('Please specify the number of messages to clear `ex: ?purge 10`')
+            .then(msg => {
+                msg.delete(2750)
+            });;
     }
     message.channel.fetchMessages({
         limit: messagecount
