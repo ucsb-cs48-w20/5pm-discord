@@ -55,9 +55,13 @@ module.exports.run = async (bot, message, args) => {
             pollLog[message.author.id]  = {
                 lastPoll: Date.now()
             };
+            let pollEmbed = new Discord.RichEmbed()
+                .setColor('#db0000')
+                .setTitle(`Poll`)
+                .setDescription(`${message.author} asks: ${question}`);
             return message
                 .channel
-                .send(`${message.author} asks: ${question}`)
+                .send(pollEmbed)
                 .then(async (pollMessage) => {
                     await pollMessage.react('👍');
                     await pollMessage.react('👎');
@@ -74,10 +78,14 @@ module.exports.run = async (bot, message, args) => {
                 pollLog[message.author.id] = {
                     lastPoll: Date.now()
                 };
+                let pollEmbed = new Discord.RichEmbed()
+                    .setColor('#db0000')
+                    .setTitle(`Poll`)
+                    .setDescription(`${message.author} asks: ${question}\n 
+${questionOptions.map((option, i) => `${optionEmojis[i]} - ${option}`).join('.\n\n')}`);
                 return message
                     .channel
-                    .send(`${message.author} asks: ${question} 
-${questionOptions.map((option, i) => `${optionEmojis[i]} - ${option}`).join('.\n')}`)
+                    .send(pollEmbed)
                     .then(async (pollMessage) => {
                         for (let i = 0; i < questionOptions.length; i++) {
                             await pollMessage.react(optionEmojis[i]);
