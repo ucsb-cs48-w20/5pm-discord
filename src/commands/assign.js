@@ -25,14 +25,30 @@ module.exports.run = async (bot, message, args) => {
 
 
 	let user = message.guild.member(message.author)
+	userPosition = user.highestRole.calculatedPosition
+
+	rolePosition = role.position // Use this check check if role can be accessed by bot (compare to botPosition)
+
+	let botUser = message.guild.members.find(x => x.user.username.localeCompare(bot.user.username) == 0);
+	botPosition = botUser.highestRole.calculatedPosition
+
+
+	//let botrole = message.guild.members.find(x => x.name.localeCompare(bot.user.username) == 0);
+	//console.log(botrole.user.position)
 
 
 	if (operation == "+") // Adding roles
 	{
-		if (!user.roles.has(role.id))
+		if (rolePosition > botPosition)
 		{
-			user.addRole(role.id)
-			return message.reply(" The following role as been assigned: " + role.name)
+			return message.reply(" The role: " + role.name + " cannot be assigned (Check with server administrator)")
+		}
+		else if (!user.roles.has(role.id))
+		{
+			{
+				user.addRole(role.id)
+				return message.reply(" The following role as been assigned: " + role.name)
+			}
 		}
 		else
 			return message.reply(" You already has the role: " + role.name)
@@ -40,6 +56,10 @@ module.exports.run = async (bot, message, args) => {
 
 	if (operation == "-") // removing roles
 	{
+		if (rolePosition > botPosition)
+		{
+			return message.reply(" The role: " + role.name + " cannot be unassigned (Check with server administrator)")
+		}
 		if (user.roles.has(role.id))
 		{
 			user.removeRole(role.id)

@@ -37,7 +37,6 @@ bot.on('ready', async () => {
 });
 
 bot.on('message',  async message => {
-
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
@@ -52,4 +51,4 @@ bot.on('message',  async message => {
 
 });
 
-bot.login(TOKEN.token);
+bot.login(TOKEN.value);
