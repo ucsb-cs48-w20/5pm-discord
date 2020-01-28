@@ -1,6 +1,5 @@
 const fs = module.require('fs');
-const errors = require("../utils/errors.js");
-const config = require("../botconfig");
+const ms = require("ms")
 
 module.exports.run = async (bot, message, args) => {
     // Check perms, self, rank, etc
@@ -38,21 +37,21 @@ module.exports.run = async (bot, message, args) => {
     // If the mentioned user already has the "mutedRole" then that can not be muted again
     if (toMute.roles.has(mutedRole.id)) return message.channel.send('This user is already muted!');
 
-    //   TODO: Check they they have entered a valid number or even entered one
+    // How much time will the user be muted
     let mutetime = args[1];
     if (!mutetime) return message.reply("You didn't specify a time!");
 
     // Add the mentioned user to the "mutedRole" and notify command sender
     await toMute.addRole(mutedRole.id);
-    message.reply(`<@${toMute.id}> has been muted for ${mutetime}`);
+    message.reply(`<@${toMute.id}> has been muted for ${ms(ms(mutetime))}`);
   
     setTimeout(function(){
       toMute.removeRole(mutedRole);
       message.channel.send(`<@${toMute.id}> has been unmuted!`);
-    }, mutetime);
+    }, ms(mutetime));
 
 };
 
 module.exports.help = {
-    name: 'mute'
+    name: 'tempmute'
 };
