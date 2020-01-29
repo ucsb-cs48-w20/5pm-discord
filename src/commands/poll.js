@@ -30,31 +30,21 @@ const optionEmojis = [
     '🇿',
 ];
 
-const pollLog = {};
 
-function canSendPoll(user_id) {
-    if (pollLog[user_id]) {
-        const timeSince = Date.now() - pollLog[user_id].lastPoll;
-        if (timeSince < 300000) {
-            return false;
-        }
-    }
-    return true;
-}
+
 
 module.exports.run = async (bot, message, args) => {
+
+    if(!message.member.hasPermission('MANAGE_MESSAGES')){
+        return errors.noPerms(message, "Moderator Role Needed")
+    }
+
     args = message.content.match(/"(.+?)"/g);
+
     if (args) {
-        if (!canSendPoll(message.author.id)) {
-            return message
-                .channel
-                .send(`${message.author} please wait before sending another poll.`);
-        }else if (args.length === 1){
+        if (args.length === 1){
             // yes or no questions
             const question = args[0].replace(/"/g, '');
-            pollLog[message.author.id]  = {
-                lastPoll: Date.now()
-            };
             let pollEmbed = new Discord.RichEmbed()
                 .setColor('#db0000')
                 .setTitle(`Poll`)
@@ -75,14 +65,11 @@ module.exports.run = async (bot, message, args) => {
             if (questionOptions > 20){
                 return message.channel.send(`${message.author} Polls are limited to 20 options`);
             } else {
-                pollLog[message.author.id] = {
-                    lastPoll: Date.now()
-                };
                 let pollEmbed = new Discord.RichEmbed()
                     .setColor('#db0000')
                     .setTitle(`Poll`)
                     .setDescription(`${message.author} asks: ${question}\n 
-${questionOptions.map((option, i) => `${optionEmojis[i]} - ${option}`).join('.\n\n')}`);
+${questionOptions.map((option, i) => `${optionEmojis[i]} - ${option}`).join('\n\n')}`);
                 return message
                     .channel
                     .send(pollEmbed)

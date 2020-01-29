@@ -37,6 +37,9 @@ bot.on('ready', async () => {
 });
 
 bot.on('message',  async message => {
+
+    if(!message.content.startsWith(prefix)) return;
+
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
