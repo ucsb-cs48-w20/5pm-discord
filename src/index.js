@@ -6,6 +6,7 @@ const fs = require("fs");
 
 const bot = new Discord.Client();
 const prefix = botconfig.prefix;
+var filterArgs = [];
 
 bot.commands = new Discord.Collection();
 
@@ -37,7 +38,14 @@ bot.on('ready', async () => {
 });
 
 bot.on('message',  async message => {
-
+    //loop for filter command, is essentially always on but by default the array SHOULD BE EMPTY
+    //so it won't execute. To 'disable' call filter with no arguments
+    for(var i = 0; i < filterArgs.length; i++){
+        if(message.content.includes(filterArgs[i])&&!message.author.bot){
+            message.reply("don't say that.");
+            message.delete(2000);
+        }
+    }
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
@@ -48,6 +56,9 @@ bot.on('message',  async message => {
     } catch (error) {
         console.error(error);
         await message.reply('there was an error trying to execute that command!');
+    }
+    if(command=="filter"){
+        filterArgs = args;
     }
 
 });

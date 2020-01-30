@@ -3,33 +3,25 @@ const errors = require("../utils/errors.js");
 const config = require("../botconfig");
 
 module.exports.run = async (bot, message, args) => {
-/* 
-    let messagecount = parseInt(args.join(' '));
     if(!message.member.hasPermission('MANAGE_MESSAGES')){
         return errors.noPerms(message, "Manage messages");
     }
-    if (messagecount > 100) {
-        return message.reply('you can only delete at most 100 messages at a time.')
-            .then(msg => {
-                msg.delete(2750)
-            });;
+    filterArgs = args;
+    var filterMessage = "You're not allowed to say: ";
+    if(filterArgs===undefined){
+        filterMessage = "Filter disabled.";
     }
-    if (isNaN(messagecount)) {
-        return message.reply('Please specify the number of messages to clear `ex: ?purge 10`')
-            .then(msg => {
-                msg.delete(2750)
-            });;
+    else if(filterArgs.length==1){
+        filterMessage += filterArgs[0];
     }
-    message.channel.fetchMessages({
-        limit: messagecount
-    }).then(messages => message.channel.bulkDelete(messages));
-
-    message.channel.send(messagecount + " Messages Deleted.")
-        .then(msg => {
-            msg.delete(2750)
-        });
-
-    if (message.content.startsWith(config.prefix + 'purge')) message.delete() */
+    else{
+        for(i = 0; i < filterArgs.length-1; i++){
+            filterMessage += filterArgs[i];
+            filterMessage += ", ";
+        }
+        filterMessage += "or " + filterArgs[filterArgs.length-1];
+    }
+    return message.channel.send(filterMessage);
 };
 
 module.exports.help = {
