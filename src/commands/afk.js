@@ -15,7 +15,6 @@ module.exports.run = async (bot, message, args) => {
         return message.reply(`I set your AFK: ${reason}`)
             .then(msg => msg.delete(5000));
     }
-
 };
 
 module.exports.help = {
