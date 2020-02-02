@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
     if (toMute.highestRole.position >= message.member.highestRole.position) return message.channel.send('You can not mute a member that is equal to or higher than yourself!');
 
     // Check if the user has the mutedRole
-    const mutedRole = message.guild.roles.find(mR => mR.name === 'Muted');
+    let mutedRole = message.guild.roles.find(mR => mR.name === 'Muted');
 
     // If the mentioned user does not have the muted role execute the following
     if (!mutedRole) {
