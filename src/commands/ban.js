@@ -9,31 +9,29 @@ module.exports.run = async (bot, message, args) => {
 
     args = message.content.split(' ').slice(1);
     const userToBan = message.mentions.users.first();
-    const banReason = args.slice(1).join(' ');
+    let banReason = args.slice(1).join(' ');
     
     if (userToBan) {
-        if (userToBan.length > 2) {
-            return message.channel.send(`${message.author} Invalid format. Please ban one user at a time.`);
+        if (message.author === userToBan) {
+            return message.channel.send(`${message.author} You cannot ban yourself.`);
         }
         else {
-            if (message.author === userToBan) {
-                return message.channel.send(`${message.author} You cannot ban yourself.`);
-            }
             if (!banReason) {
-                return message.channel.send(`${message.author} You must have a reason to ban!`);
+                banReason = "unacceptable behvaror"
             }
-            else {
-                await message.guild.ban(userToBan) // Bans the user
-                const banConfirmationEmbed = new Discord.RichEmbed()
-                .setColor('RED')
-                .setDescription(`✅ ${userToBan} has been successfully banned!`);
-                message.channel.send({
-                embed: banConfirmationEmbed
-                });
-            }
+            await message.guild.ban(userToBan) // Bans the user
+            const banConfirmationEmbed = new Discord.RichEmbed()
+            .setColor('RED')
+            .setDescription(`✅ ${userToBan} has been successfully banned!`);
+            message.channel.send({
+            embed: banConfirmationEmbed
+            })
+            .then(msg => {
+                msg.delete({ timeout: 30000 })
+            });
         }
     } else { 
-        return message.channel.send(`${message.author} Invalid format. Please put the user to be banned wrapped in double quotes, i.e. ?ban @thisUser#2131 Spam`);
+        return message.channel.send(`${message.author} Invalid format. Please ban in the following format: ?ban @thisUser#2131 Spam`);
     }
 };
 
