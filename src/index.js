@@ -38,14 +38,16 @@ bot.on('ready', async () => {
 });
 
 bot.on('message',  async message => {
+
     //loop for filter command, is essentially always on but by default the array SHOULD BE EMPTY
     //so it won't execute. To 'disable' call filter with no arguments
     for(var i = 0; i < filterArgs.length; i++){
         if(message.content.toLowerCase().includes(filterArgs[i])&&!message.author.bot){
-            message.reply("don't say that.").then(msg => {msg.delete(2000)});
             message.delete(0);
         }
     }
+
+    if(!message.content.startsWith(prefix)) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
@@ -58,10 +60,10 @@ bot.on('message',  async message => {
         console.error(error);
         await message.reply('there was an error trying to execute that command!');
     }
+
     if(command=="filter"){
         filterArgs = args;
     }
-
 });
 
 bot.login(TOKEN.value);
