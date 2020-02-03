@@ -1,0 +1,28 @@
+Project: Discord Bot 
+
+
+Mentor: Terrell Marshall 
+
+
+Meeting Time: Thursday 5:00pm 
+
+
+Type of Meeting: Standup 
+
+
+Team: Arjun ✓ Tanay ✓ Max ✓ Ron ✓ Patrick ✓
+
+
+Arjun: Took a look at comments and fixed issues. Working on twitter api with Max
+
+
+Max: Fixed filter and looked at comments on pr. Working on twitter integration with arjun
+
+
+Patrick: Fixed a bug in mute where it wouldn't create a muted role. Created a mute and unmute command
+
+
+Ron: Started looking at Youtube api and working on command
+
+
+Tanay: Looked into continous integration and Unit tests
