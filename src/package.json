@@ -9,9 +9,12 @@
   "author": "Tanay, Max, Patrick, Ron, Arjun",
   "license": "ISC",
   "dependencies": {
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "ms": "^2.1.2",
+    "winston": "^3.2.1"
   }
 }
