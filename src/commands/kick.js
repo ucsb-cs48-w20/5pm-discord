@@ -16,7 +16,6 @@ module.exports.run = async (bot, message, args) => {
                 args = "Unspecified Reason"
             }
             member.kick(args).then(() => {
-
                 message.reply(`Successfully kicked ${user.username}`);
             }).catch(err => {
 
