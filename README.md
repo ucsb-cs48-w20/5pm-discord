@@ -1,8 +1,12 @@
-# 5pm-discord
+## 5pm-discord
 
-> A GitHub bot for Discord
+## Project Summary
 
-You must have already installed NPM, Git, NodeJS and DiscordJS! You will also need to have a Discord account and have installed Discord.
+Does your Discord Server suck? This bot makes it a whole better. We offer a suite of moderation tools to protect your server from trolls and goblins.
+
+##Installation
+
+You must have already installed NodeJS. 
 
 Clone this repository (Branch: Master). 
 
