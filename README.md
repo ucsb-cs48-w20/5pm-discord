@@ -31,6 +31,8 @@ Once the bot is live on your server you can use the following commands:
 | ?filter "word" "word2" etc. | Max | Automatically delete messages that contain any filtered words sent after the filter is enabled. |
 | ?filter | Max | Disables the filter |
 | ?tempmute "time" | Patrick | Temporarily mutes a user for a specified amount of time |
+| ?mute @username | Patrick | Mutes a specified user |
+| ?unmute @username | Patrick | Unmutes a specified user |
 | ?assign +RoleName | Ron | Users can add a role to their profile |
 | ?assign -RoleName | Ron | Users can remove a role from their profile|
 | ?ban "reason" | Arjun | Ban a user for a provided reason |
