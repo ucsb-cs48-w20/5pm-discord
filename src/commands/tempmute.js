@@ -18,7 +18,7 @@ module.exports.run = async (bot, message, args) => {
             // Create a role called "Muted"
             mutedRole = await message.guild.createRole({
                 name: 'Muted',
-                color: '#000000',
+                color: 'RED',
                 permissions: []
             });
 
