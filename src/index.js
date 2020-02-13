@@ -9,7 +9,7 @@ const prefix = botconfig.prefix;
 var filterArgs = [];
 
 bot.commands = new Discord.Collection();
-
+bot.afk = new Map();
 fs.readdir("./commands/", (err, files) => {
 
     if(err){
@@ -37,10 +37,9 @@ bot.on('ready', async () => {
     await bot.user.setActivity("?help", {type: "Bot being developed!"});
 });
 
-    if(!message.content.startsWith(prefix)) return;
-    if (message.author.bot) return;
 
 bot.on('message',  async message => {
+    if (message.author.bot) return;
 
     //loop for filter command, is essentially always on but by default the array SHOULD BE EMPTY
     //so it won't execute. To 'disable' call filter with no arguments
