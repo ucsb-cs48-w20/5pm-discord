@@ -10,7 +10,6 @@ module.exports.run = async (bot, message, args) => {
             id: message.author.id,
             reason: reason
         };
-
         bot.afk.set(message.author.id, construct);
         return message.reply(`I set your AFK: ${reason}`)
             .then(msg => msg.delete(5000));
