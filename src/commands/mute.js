@@ -7,7 +7,7 @@ module.exports.run = async (bot, message, args) => {
     const toMute = message.mentions.members.first() || message.guild.members.get(args[0]);
     if (!toMute) return message.channel.send('You did not specify a user mention or ID!');
     if (toMute.id === message.author.id) return message.channel.send('You can not mute yourself!');
-    if (toMute.highestRole.position >= message.member.highestRole.position) return message.channel.send('You can not mute a member that is equal to or higher than yourself!');
+    if (toMute.highestRole.position >= message.member.highestRole.position) return message.channel.send('You can not mute a member that is equal to or higher than yourself!'); 
 
     // Check if the user has the mutedRole
     let mutedRole = message.guild.roles.find(mR => mR.name === 'Muted');
@@ -37,21 +37,12 @@ module.exports.run = async (bot, message, args) => {
     // If the mentioned user already has the "mutedRole" then that can not be muted again
     if (toMute.roles.has(mutedRole.id)) return message.channel.send('This user is already muted!');
 
-    // How much time will the user be muted
-    let mutetime = args[1];
-    if (!mutetime) return message.reply("You didn't specify a time!");
-
     // Add the mentioned user to the "mutedRole" and notify command sender
     await toMute.addRole(mutedRole.id);
-    message.reply(`<@${toMute.id}> has been muted for ${ms(ms(mutetime))}`);
-  
-    setTimeout(function(){
-      toMute.removeRole(mutedRole);
-      message.channel.send(`<@${toMute.id}> has been unmuted!`);
-    }, ms(mutetime));
+    message.reply(`<@${toMute.id}> has been muted`);
 
 };
 
 module.exports.help = {
-    name: 'tempmute'
+    name: 'mute'
 };
