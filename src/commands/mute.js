@@ -7,8 +7,7 @@ module.exports.run = async (bot, message, args) => {
     const toMute = message.mentions.members.first() || message.guild.members.get(args[0]);
     if (!toMute) return message.channel.send('You did not specify a user mention or ID!');
     if (toMute.id === message.author.id) return message.channel.send('You can not mute yourself!');
-    if (toMute.highestRole.position >= message.member.highestRole.position) return message.channel.send(toMute.highestRole.postion + " " + message.member.highestRole.position);
-    // message.channel.send('You can not mute a member that is equal to or higher than yourself!'); 
+    if (toMute.highestRole.position >= message.member.highestRole.position) return message.channel.send('You can not mute a member that is equal to or higher than yourself!'); 
 
     // Check if the user has the mutedRole
     let mutedRole = message.guild.roles.find(mR => mR.name === 'Muted');
