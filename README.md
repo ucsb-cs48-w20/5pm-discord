@@ -37,7 +37,7 @@ Once the bot is live on your server you can use the following commands:
 | ?kick @user "reason" | Tanay | Kick a user for a provided reason |
 | ?filter "word" "word2" etc. | Max | Automatically delete messages that contain any filtered words sent after the filter is enabled. |
 | ?filter | Max | Disables the filter |
-| ?tempmute "time" | Patrick | Temporarily mutes a user for a specified amount of time |
+| ?tempmute @user "time" | Patrick | Temporarily mutes a user for a specified amount of time |
 | ?mute @user | Patrick | Mutes a specified user |
 | ?unmute @user | Patrick | Unmutes a specified user |
 | ?assign +RoleName | Ron | Users can add a role to their profile |
