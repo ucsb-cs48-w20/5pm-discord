@@ -42,6 +42,7 @@ Once the bot is live on your server you can use the following commands:
 | ?unmute @user | Patrick | Unmutes a specified user |
 | ?assign +RoleName | Ron | Users can add a role to their profile |
 | ?assign -RoleName | Ron | Users can remove a role from their profile|
+| ?joke | Ron | Tells the user a joke|
 | ?ban @user "reason" | Arjun | Ban a user for a provided reason |
 
 ## Known Problems
