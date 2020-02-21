@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Niramit&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+.rotate-45 {
+    transform: rotate(45deg);
+}
+.rotate-90 {
+    transform: rotate(90deg);
+}
