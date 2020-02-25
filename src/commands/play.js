@@ -2,9 +2,10 @@ const TOKEN = require("../token.json");
 const YouTube = require('simple-youtube-api');
 const Util = require('discord.js');
 const ytdl = require('youtube-dl');
+const queue = require('../utils/guildQueue')
 
 const youtube = new YouTube(TOKEN.googleKey);
-const queue = new Map();
+// const queue = new Map();
 
 module.exports.run = async (bot, message, args) => {
     const serverQueue = queue.get(message.guild.id);
@@ -69,15 +70,15 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 
 		queueConstruct.songs.push(song);
 
-		// try {
-        var connection = await voiceChannel.join();
-        queueConstruct.connection = connection;
-        play(msg.guild, queueConstruct.songs[0]);
-		// } catch (error) {
-		// 	console.error(`I could not join the voice channel: ${error}`);
-		// 	queue.delete(msg.guild.id);
-		// 	return msg.channel.send(`I could not join the voice channel: ${error}`);
-		// }
+		try {
+            var connection = await voiceChannel.join();
+            queueConstruct.connection = connection;
+            play(msg.guild, queueConstruct.songs[0]);
+		} catch (error) {
+			console.error(`I could not join the voice channel: ${error}`);
+			queue.delete(msg.guild.id);
+			return msg.channel.send(`I could not join the voice channel: ${error}`);
+		}
 	} else {
 		serverQueue.songs.push(song);
 		console.log(serverQueue.songs);
