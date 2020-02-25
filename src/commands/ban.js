@@ -17,7 +17,7 @@ module.exports.run = async (bot, message, args) => {
         }
         else {
             if (!banReason) {
-                banReason = "unacceptable behvaior"
+                banReason = "unacceptable behavior"
             }
             await message.guild.ban(userToBan) // Bans the user
             const banConfirmationEmbed = new Discord.RichEmbed()
