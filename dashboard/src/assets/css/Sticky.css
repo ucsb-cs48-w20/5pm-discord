@@ -1,0 +1,10 @@
+.sticky__wrapper {
+    position: relative;
+// height: 4rem; /* probably you need to set height value for wrapper */
+}
+
+.sticky .sticky--inner {
+    position: fixed;
+// bottom: 0;
+    z-index: 1;
+}

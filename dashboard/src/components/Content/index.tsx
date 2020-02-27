@@ -5,6 +5,7 @@ import '../Red3DBtn/index';
 import {Button} from "../Red3DBtn";
 import { Tabs } from "../Tabs/tabs";
 import { Accordion } from "../Accordion/accordion";
+import StickyFooter from "react-sticky-footer";
 
 const AdminCommands = [
     {
@@ -184,7 +185,22 @@ const Content : React.FC = () => {
                     </div>
                 </Tabs>
             </div>
-            Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+            <StickyFooter
+                bottomThreshold={50}
+                normalStyles={{
+                    backgroundColor: "rgba(122,1,0,0.95)",
+                    padding: "2rem",
+                    textAlign:"center"
+                }}
+                stickyStyles={{
+                    backgroundColor: "rgba(122,22,18,0.98)",
+                    padding: "0.75rem",
+                    width:"100%",
+                    textAlign:"center"
+                }}
+            >
+                <Button onClick={handleInvite} children={"Dashboard"} />
+            </StickyFooter>
         </>
     )
 };
