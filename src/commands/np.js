@@ -6,14 +6,10 @@ const youtube = new YouTube(TOKEN.googleKey);
 
 module.exports.run = async (bot, message, args) => {
     const serverQueue = queue.get(message.guild.id);
-    if (serverQueue && serverQueue.playing) {
-        serverQueue.playing = false;
-        serverQueue.connection.dispatcher.pause();
-        return message.channel.send('⏸ Paused the music for you!');
-    }
-    else return message.channel.send('There is nothing playing.');
+    if (!serverQueue) return message.channel.send('There is nothing playing.');
+    return message.channel.send(`🎶 Now playing: **${serverQueue.songs[0].title}**`);
 }
 
 module.exports.help = {
-    name: "pause"
+    name: "np"
 }
