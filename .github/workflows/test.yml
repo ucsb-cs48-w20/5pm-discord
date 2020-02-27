@@ -1,16 +1,23 @@
-name: Tests
+name: CI
 
 on: [push]
 
 jobs:
   build:
+    name: Test
     env:
         working-directory: ./dashboard
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Run Jest
-      uses: stefanoeb/jest-action@1.0.2
-
+      - uses: actions/checkout@v1
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: --cwd dashboard install # will run `yarn install` command
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: --cwd dashboard build # will run `yarn build` command
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: --cwd dashboard test # will run `yarn test` command
