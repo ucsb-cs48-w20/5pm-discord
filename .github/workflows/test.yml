@@ -5,8 +5,6 @@ on: [push]
 jobs:
   build:
     name: Test
-    env:
-        working-directory: ./dashboard
 
     runs-on: ubuntu-latest
 
@@ -18,4 +16,4 @@ jobs:
 
       - uses: borales/actions-yarn@v2.0.0
         with:
-          cmd: --cwd dashboard test # will run `yarn test` command
+          cmd: --cwd dashboard test --ci # will run `yarn test` command
