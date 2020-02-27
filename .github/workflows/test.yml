@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    eenv:
+    env:
         working-directory: ./dashboard
 
     runs-on: ubuntu-latest
