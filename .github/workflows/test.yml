@@ -4,6 +4,8 @@ on: [push]
 
 jobs:
   build:
+    eenv:
+        working-directory: ./dashboard
 
     runs-on: ubuntu-latest
 
@@ -11,4 +13,4 @@ jobs:
     - uses: actions/checkout@v1
     - name: Run Jest
       uses: stefanoeb/jest-action@1.0.2
-      working-directory: ./dashboard
+
