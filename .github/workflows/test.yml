@@ -7,7 +7,8 @@ jobs:
     name: Test
 
     runs-on: ubuntu-latest
-
+    env:
+      CI: true
     steps:
       - uses: actions/checkout@v1
       - uses: borales/actions-yarn@v2.0.0
@@ -16,4 +17,4 @@ jobs:
 
       - uses: borales/actions-yarn@v2.0.0
         with:
-          cmd: --cwd dashboard test --ci # will run `yarn test` command
+          cmd: --cwd dashboard test # will run `yarn test` command
