@@ -1,8 +1,8 @@
 import React from "react"
 import '../../assets/css/main.css';
 import '../../styles/tailwind.css';
-import '../Red3DBtn/index';
-import {Button} from "../Red3DBtn";
+import '../Red3DBtn/button';
+import {Button} from "../Red3DBtn/button";
 import { Tabs } from "../Tabs/tabs";
 import { Accordion } from "../Accordion/accordion";
 

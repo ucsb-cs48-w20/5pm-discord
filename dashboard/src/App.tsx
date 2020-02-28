@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Background from "./components/Background";
-import Content from "./components/Content";
+import Background from "./components/Background/background";
+import Content from "./components/Content/content";
 const App = () => {
     return (
         <div>
