@@ -5,7 +5,6 @@ const ytdl = require('youtube-dl');
 const queue = require('../utils/guildQueue')
 
 const youtube = new YouTube(TOKEN.googleKey);
-// const queue = new Map();
 
 module.exports.run = async (bot, message, args) => {
     const serverQueue = queue.get(message.guild.id);
@@ -84,6 +83,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 		console.log(serverQueue.songs);
 		if (playlist) return undefined;
 		else return msg.channel.send(`✅ **${song.title}** has been added to the queue!`);
+		return msg.channel.send(`✅ **${song.title}** has been added to the queue!`);
 	}
 	return undefined;
 }
