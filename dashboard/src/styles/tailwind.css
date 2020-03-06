@@ -13683,6 +13683,179 @@ video {
           transform: rotate(90deg);
 }
 
+.desc {
+  font-size: 1.5rem;
+  font-family: Niramit, Oswald;
+  text-align: center;
+  padding-left: 5rem;
+  padding-top: 3rem;
+  padding-right: 4rem;
+}
+
+.greetingTitle {
+  font-size: 4rem;
+  font-family: Niramit, Oswald;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.redbtn {
+  outline: 0;
+  background-color: #f56565;
+  color: #fff;
+  font-weight: 700;
+  border-bottom-width: 4px;
+  border-color: #c53030;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.redbtn:hover {
+  background-color: #fc8181;
+  border-color: #f56565;
+}
+
+.tab {
+  outline: 0;
+  background-color: #e2e8f0;
+  color: #e53e3e;
+  font-family: Niramit, Oswald;
+  border-width: 1px;
+  border-color: #718096;
+  border-radius: 0.25rem;
+}
+
+.tab:hover {
+  background-color: #cbd5e0;
+}
+
+.accordion {
+  display: -webkit-inline-box;
+  display: inline-flex;
+  font-size: 1.5rem;
+  text-align: left;
+  font-family: Niramit, Oswald;
+  height: auto;
+  width: 100%;
+  background-color: #e2e8f0;
+  color: #000;
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+
+.accordion:hover {
+  color: #e53e3e
+}
+
+.accordion:focus {
+  color: #e53e3e
+}
+
+.text-md {
+  font-size: 0.88rem;
+}
+
+.inactiveAccordion {
+  display: -webkit-inline-box;
+  display: inline-flex;
+  font-size: 0.88rem;
+  text-align: left;
+  font-family: Niramit, Oswald;
+  height: auto;
+  width: 100%;
+  background-color: #e2e8f0;
+  color: #000;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.inactiveAccordion:hover {
+  color: #e53e3e;
+}
+
+.panel {
+  font-size: 0.75rem;
+  text-align: left;
+  align-content: center;
+  height: auto;
+  width: 100%;
+  background-color: #e2e8f0;
+  font-family: Niramit, Oswald;
+  --transform-translate-x: 0;
+  --transform-translate-y: 0;
+  --transform-rotate: 0;
+  --transform-skew-x: 0;
+  --transform-skew-y: 0;
+  --transform-scale-x: 1;
+  --transform-scale-y: 1;
+  -webkit-transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+          transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+  --transform-translate-x: 1rem;
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition-duration: 500ms;
+          transition-duration: 500ms;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem
+}
+
+.inactivePanel {
+  font-size: 0.75rem;
+  text-align: left;
+  align-content: center;
+  height: auto;
+  width: 100%;
+  background-color: #e2e8f0;
+  font-family: Niramit, Oswald;
+  --transform-translate-x: 0;
+  --transform-translate-y: 0;
+  --transform-rotate: 0;
+  --transform-skew-x: 0;
+  --transform-skew-y: 0;
+  --transform-scale-x: 1;
+  --transform-scale-y: 1;
+  -webkit-transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+          transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+  --transform-translate-x: 0.5rem;
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition-duration: 500ms;
+          transition-duration: 500ms;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem
+}
+
+.plusRotate {
+  margin-left: auto;
+  --transform-translate-x: 0;
+  --transform-translate-y: 0;
+  --transform-rotate: 0;
+  --transform-skew-x: 0;
+  --transform-skew-y: 0;
+  --transform-scale-x: 1;
+  --transform-scale-y: 1;
+  -webkit-transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+          transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+  --transform-translate-y: 0.25rem
+}
+
+.plusRotateBack {
+  margin-left: auto;
+  --transform-translate-x: 0;
+  --transform-translate-y: 0;
+  --transform-rotate: 0;
+  --transform-skew-x: 0;
+  --transform-skew-y: 0;
+  --transform-scale-x: 1;
+  --transform-scale-y: 1;
+  -webkit-transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+          transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+  --transform-translate-y: 0.25rem
+}
+
 @media (min-width: 640px){
   .sm\:sr-only{
     position: absolute !important;

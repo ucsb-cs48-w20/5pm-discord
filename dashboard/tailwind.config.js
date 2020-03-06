@@ -23,5 +23,8 @@ module.exports = {
         borderWidth: ['responsive', 'last', 'hover', 'focus'],
         textColor: ['responsive', 'hover', 'focus'],
         opacity: ['responsive', 'hover']
-    }
+    },
+    plugins: [
+        require('postcss-preset-env')({ stage: 0 })
+    ]
 }

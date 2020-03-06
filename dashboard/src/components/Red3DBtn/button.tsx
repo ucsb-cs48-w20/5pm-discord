@@ -9,5 +9,5 @@ type Props = {
 }
 
 export const Button: React.FC<Props> = ({ children, onClick }) => {
-    return <button className="outline-none bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" onClick={onClick}>{children}</button>
+    return <button className="redbtn text-lg sm:text-2xl sm:h-auto sm:w-auto md:text-xl md:h-auto lg:text-4xl lg:h-auto lg:py-2 lg:px-3 lg:mt-10" onClick={onClick}>{children}</button>
 }
