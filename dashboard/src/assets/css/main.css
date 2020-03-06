@@ -6,7 +6,7 @@ body {
     background-image: url("../background.jpg");
     background-repeat: no-repeat;
     background-color: #c52e20;
-    background-size: 225vh;
+    background-size:125%
 }
 hr {
     border: 0;

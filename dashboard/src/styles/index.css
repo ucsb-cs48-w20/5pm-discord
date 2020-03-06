@@ -13,3 +13,51 @@
 .rotate-90 {
     transform: rotate(90deg);
 }
+.desc {
+    @apply text-2xl font-body text-center pl-20 pt-12 pr-16;
+}
+.greetingTitle {
+    @apply text-6xl font-body text-center pb-4;
+}
+.redbtn {
+    @apply outline-none bg-red-500 text-white font-bold border-b-4 border-red-700 px-2 py-1 rounded;
+}
+.redbtn:hover {
+    @apply bg-red-400 border-red-500;
+}
+.tab {
+    @apply outline-none bg-gray-300 text-red-600 font-body border border-gray-600 rounded;
+}
+.tab:hover {
+    @apply bg-gray-400;
+}
+.accordion {
+    @apply inline-flex text-2xl text-left font-body h-auto w-full bg-gray-300 text-black px-4
+}
+.accordion:hover {
+    @apply text-red-600
+}
+.accordion:focus {
+    @apply text-red-600
+}
+.text-md {
+    font-size: 0.88rem;
+}
+.inactiveAccordion {
+    @apply inline-flex text-md text-left font-body h-auto w-full bg-gray-300 text-black px-4;
+}
+.inactiveAccordion:hover {
+    @apply text-red-600;
+}
+.panel {
+    @apply text-xs text-left content-center h-auto w-full bg-gray-300 font-body transform translate-x-4 ease-in-out duration-500 py-2
+}
+.inactivePanel {
+    @apply text-xs text-left content-center h-auto w-full bg-gray-300 font-body transform translate-x-2 ease-in-out duration-500 py-2
+}
+.plusRotate {
+    @apply ml-auto transform translate-y-1
+}
+.plusRotateBack {
+    @apply ml-auto transform translate-y-1
+}

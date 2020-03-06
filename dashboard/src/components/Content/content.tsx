@@ -107,62 +107,61 @@ const Content : React.FC = () => {
         <>
             <div className="content">
                 <div className = "grid grid-cols-12 gap-3">
-                        <div className="col-start-3 col-span-3 text-center">
-                            <h1 className="text-6xl font-sans text-center pb-4">Meet Ora.</h1>
-                            <Button onClick={handleInvite} children={"Invite me!"} />
-                            <div className="p-4"/>
-                            <hr/>
-                        </div>
-                        <div className="col-span-6">
-                            <p className="text-2xl font-body text-center pl-20 pt-12 pr-16">Ora is the most versatile and easy to use bot for your discord server. Our bot provides a wide variety of features and is constantly being improved. If you need a music bot, moderation bot or want to browse twitter, Ora is the bot for you.</p>
-                            <p className="text-xl font-body text-center pl-20 pt-8 pr-16">Ora was created by Tanay, Max, Ron, Patrick and Arjun</p>
-                        </div>
+                    <div className="text-center col-start-2 col-span-10 lg:col-start-3 lg:col-span-3">
+                        <h1 className="font-body text-3xl md:text-3xl lg:text-6xl">Meet Ora.</h1>
+                        <Button onClick={handleInvite} children={"Invite me!"} />
+                        <div className="p-4"/>
+                        <hr/>
+                    </div>
+                    <div className="row-start-2 col-span-12 lg:col-start-7 lg:col-span-5 lg:row-start-1">
+                        <p className="text-lg font-body text-center pl-20 pt-12 pr-16 md:text-xl lg:text-xl">Ora is the most versatile and easy to use bot for your discord server. Our bot provides a wide variety of features and is constantly being improved. If you need a music bot, moderation bot or want to browse twitter, Ora is the bot for you.</p>
+                        <p className="text-base font-body text-center pl-20 pt-8 pr-16 md:text-lg lg:text-lg">Ora was created by Tanay, Max, Ron, Patrick and Arjun</p>
+                    </div>
                 </div>
-                <br/>
                 <br/>
                 <div className="col-span-4 text-center">
                     <div className="grid grid-cols-4">
                         <div className="col-start-2">
-                        <Button onClick={handleRepo} children={"Source Code"} />
+                            <Button onClick={handleRepo} children={"Github"} />
                         </div>
                         <div className="col-span-1">
-                        <Button onClick={handleHelp} children={"Help Desk"} />
+                            <Button onClick={handleHelp} children={"Help Desk"} />
                         </div>
                     </div>
                     <br/>
                     <br/>
                     <div className="grid grid-cols-6">
-                    <hr className="col-start-2 col-span-4"/>
+                        <hr className="col-start-2 col-span-4"/>
                     </div>
                 </div>
                 <Tabs>
-                    <div className = "grid grid-cols-10 text-center pt-32">
-                    {/* Group of tabs */}
-                        <div className="col-span-3">
-                        </div>
-                        <div className="col-span-1">
-                            <Tabs.Tab label="a">Admin</Tabs.Tab>
-                        </div>
-                        <div className="col-span-1">
-                            <Tabs.Tab label="b">Utility</Tabs.Tab>
-                        </div>
-                        <div className="col-span-1">
-                            <Tabs.Tab label="c">Music</Tabs.Tab>
-                        </div>
-                        <div className="col-span-1">
-                            <Tabs.Tab label="d">Misc</Tabs.Tab>
-                        </div>
-                        <div className="col-span-3">
+                    <div className = "grid grid-cols-12 text-center pt-32">
+                        {/* Group of tabs */}
+                        <div className="col-start-3 col-span-9 sm:col-start-4 lg:col-start-3">
+                            <div className="lg:grid lg:grid-cols-7">
+                                <div className="lg:col-start-2 lg:col-span-1">
+                                    <Tabs.Tab label="a">Admin</Tabs.Tab>
+                                </div>
+                                <div className="lg:col-span-1">
+                                    <Tabs.Tab label="b">Utility</Tabs.Tab>
+                                </div>
+                                <div className="lg:col-span-1">
+                                    <Tabs.Tab label="c">Music</Tabs.Tab>
+                                </div>
+                                <div className="lg:col-span-1">
+                                    <Tabs.Tab label="d">Misc</Tabs.Tab>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <br/>
                     <div className = "grid grid-cols-10">
                         <div className="col-span-2"> </div>
-                        <div className="col-span-6 bg-gray-300 border border-gray-700 rounded">
+                        <div className="col-span-6 bg-gray-300 border border-gray-700 rounded pb-2">
                             <Tabs.Panel label="a">
-                                    <div className="font-body text-center">
-                                        <Accordion items={AdminCommands} duration={300} multiple={true} />
-                                    </div>
+                                <div className="font-body text-center">
+                                    <Accordion items={AdminCommands} duration={300} multiple={true} />
+                                </div>
                             </Tabs.Panel>
                             <Tabs.Panel label="b">
                                 <div className="font-body text-center">

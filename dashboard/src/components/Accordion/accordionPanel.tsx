@@ -47,14 +47,15 @@ class Panel extends React.Component<Props> {
         };
 
         var btnClass, panelClass, rotateSVG;
-        if (isActive) btnClass = 'inline-flex text-2xl text-left outline-none font-body h-20 w-full bg-gray-300 hover:text-red-600 text-black focus:text-red-700 px-4';
-        else btnClass = 'inline-flex text-2xl text-left outline-none font-body h-20 w-full bg-gray-300 hover:text-red-600 text-black px-4';
+        if (isActive) btnClass = 'outline-none accordion focus:accordion hover:accordion text-md lg:text-2xl';
+        else btnClass = 'outline-none inactiveAccordion hover:inactiveAccordion lg:text-2xl';
 
-        if (isActive) panelClass = 'items-center text-2xl text-left container content-center h-20 w-full bg-gray-300 font-body transform translate-x-8 ease-in-out duration-500';
-        else panelClass = 'items-center text-2xl text-left container content-center h-20 w-full bg-gray-300 font-body transform translate-x-4 ease-in-out duration-300';
+        if (isActive) panelClass = 'panel lg:text-2xl lg:transform lg:translate-x-8';
+        else panelClass = 'inactivePanel lg:text-2xl lg:transform lg:translate-x-4';
 
-        if(isActive) rotateSVG = 'ml-auto transform rotate-45 duration-500';
-        else rotateSVG = 'ml-auto transform rotate-90 duration-500';
+        if(isActive) rotateSVG = 'plusRotate rotate-45 duration-500 h-4 lg:h-6';
+        else rotateSVG = 'plusRotateBack rotate-90 duration-500 h-4 lg:h-6';
+
         return (
             <div className="font-body" role="tabpanel" aria-expanded={isActive}>
                 <button
