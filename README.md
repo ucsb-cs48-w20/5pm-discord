@@ -10,10 +10,10 @@ This Discord bot is targeted at Discord powerusers and moderators seeking ways t
 ## Installation
 
 ### Prerequisites
-NodeJS, a Discord Account, and Discord itself.
+Yarn, React, NodeJS, a Discord Account, and Discord itself.
 
 ### Dependencies
-NodeJS, DiscordJS.
+NodeJS, DiscordJS, React.
 
 ### Installation Steps
 Clone this repository (Branch: Master). Go to https://discordapp.com/developers/applications/ and create an application. This will provide a bot token you must place into a token.json file in the src directory. The file must be formatted as follows:
