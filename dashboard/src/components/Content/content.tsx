@@ -114,7 +114,7 @@ const Content : React.FC = () => {
                         <hr/>
                     </div>
                     <div className="row-start-2 col-span-12 lg:col-start-7 lg:col-span-5 lg:row-start-1">
-                        <p className="text-lg font-body text-center pl-20 pt-12 pr-16 md:text-xl lg:text-xl">Ora is the most versatile and easy to use bot for your discord server. Our bot provides a wide variety of features and is constantly being improved. If you need a music bot, moderation bot or want to browse twitter, Ora is the bot for you.</p>
+                        <p className="text-lg font-body text-center pl-20 pt-12 pr-16 md:text-xl lg:text-xl">Does your Discord Server suck? This bot makes it a whole better. We offer a suite of moderation tools to protect your server from trolls and goblins. Our bot provides a wide variety of features and is constantly being improved. If you need a music bot, moderation bot or want to browse twitter, Ora is the bot for you.</p>
                         <p className="text-base font-body text-center pl-20 pt-8 pr-16 md:text-lg lg:text-lg">Ora was created by Tanay, Max, Ron, Patrick and Arjun</p>
                     </div>
                 </div>
