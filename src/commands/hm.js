@@ -25,11 +25,11 @@ module.exports.run = async (bot, message, args) => {
     guess = "";
 
     if (args.length != 1) // Checks that correct number of inputs is provided
-        return message.reply(" Something went wrong -- Correct syntax is ?hangman <guess>\n <guess> can either be a letter or \"new\" to start new game");
+        return message.reply(" Something went wrong -- Correct syntax is ?hm <guess>\n <guess> can either be a letter or \"new\" to start new game");
     if (args[0].localeCompare("new") !=0 && args[0].length != 1)
-        return message.reply(" Something went wrong -- Correct syntax is ?hangman <guess>\n <guess> can either be a letter or \"new\" to start new game");
+        return message.reply(" Something went wrong -- Correct syntax is ?hm <guess>\n <guess> can either be a letter or \"new\" to start new game");
     if (word.localeCompare("") ==0 && args[0].length == 1)
-        return message.reply(" Something went wrong -- Correct syntax is ?hangman <guess>\n <guess> can either be a letter or \"new\" to start game over \n (Must start a new game before you can start guessing!)");
+        return message.reply(" Something went wrong -- Correct syntax is ?hm <guess>\n <guess> can either be a letter or \"new\" to start game over \n (Must start a new game before you can start guessing!)");
 
     operation = args[0].toLowerCase();
     if (operation.localeCompare("new") == 0)
