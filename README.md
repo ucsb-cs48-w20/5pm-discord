@@ -46,6 +46,8 @@ Once the bot is live on your server you can use the following commands:
 | ?ban @user | Arjun | Ban a user with a default reason |
 | ?ban @user "reason" | Arjun | Ban a user for a provided reason |
 | ?twitter followUser "twitterHandle" | Arjun | All tweets by followed users are posted in the discord server |
+| ?twitter postTweet "tweet" | Arjun | Posts the tweet on twitter |
+| ?twitter getLastTweet "twitterHandle" | Arjun | The last tweet of the given user is posted in the discord server |
 
 ## Known Problems
 The filter command has no memory of previous arguments, so the only way to add words to the current filter is by calling it again with the same arguments plus the ones to be added.
