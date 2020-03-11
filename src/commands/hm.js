@@ -1,10 +1,10 @@
- 
+
 
 const Discord = require("discord.js");
 const errors = require("../utils/errors.js");
 const config = require("../botconfig");
 const hm = require("../utils/hm.json");
- 
+
 
 
 function getRandomInt(max) {
@@ -14,31 +14,35 @@ function getRandomInt(max) {
 let x = 0
 let guess = "";
 let word = "";
-var correctLetters = new Set(); 
-var wrongLetters = new Set(); 
-var wordLetters = new Set(); 
+var correctLetters = new Set();
+var wrongLetters = new Set();
+var wordLetters = new Set();
 let remainingTries = 6;
 let guessedLetters = [];
 
 module.exports.run = async (bot, message, args) => {
 
     guess = "";
-
+    let hmArgs = args;
+    for(let i = 0; i < hmArgs.length; i++){
+        let arg = hmArgs[i].replace(/"/g, "");
+        hmArgs[i]=arg.toLowerCase();
+    }
     if (args.length != 1) // Checks that correct number of inputs is provided
-        return message.reply(" Something went wrong -- Correct syntax is ?hm <guess>\n <guess> can either be a letter or \"new\" to start new game");
-    if (args[0].localeCompare("new") !=0 && args[0].length != 1)
-        return message.reply(" Something went wrong -- Correct syntax is ?hm <guess>\n <guess> can either be a letter or \"new\" to start new game");
-    if (word.localeCompare("") ==0 && args[0].length == 1)
-        return message.reply(" Something went wrong -- Correct syntax is ?hm <guess>\n <guess> can either be a letter or \"new\" to start game over \n (Must start a new game before you can start guessing!)");
+        return message.reply(" Something went wrong -- Correct syntax is ?hm <guess>\n can either be a letter in quotes or \"new\" to start new game");
+    if (hmArgs[0].localeCompare("new") !=0 && hmArgs[0].length != 1)
+        return message.reply(" Something went wrong -- Correct syntax is ?hm <guess>\n can either be a letter in quotes or \"new\" to start new game");
+    if (word.localeCompare("") ==0 && hmArgs[0].length == 1)
+        return message.reply(" Something went wrong -- Correct syntax is ?hm <guess>\n can either be a letter in quotes or \"new\" to start game over \n (Must start a new game before you can start guessing!)");
 
-    operation = args[0].toLowerCase();
+    operation = hmArgs[0].toLowerCase();
     if (operation.localeCompare("new") == 0)
     {
         correctLetters.clear();
         wrongLetters.clear();
         guessedLetters = [];
         word = hm["words"][getRandomInt(60)]
-        wordLetters = new Set(word); // puts all unique letters in word in wordLetters set 
+        wordLetters = new Set(word); // puts all unique letters in word in wordLetters set
         remainingTries = 6;
 
     }
@@ -50,7 +54,7 @@ module.exports.run = async (bot, message, args) => {
 
 
 
-        //guessing letter: 
+        //guessing letter:
         if (wordLetters.has(operation))
         {
             correctLetters.add(operation)
@@ -101,10 +105,10 @@ module.exports.run = async (bot, message, args) => {
         exampleEmbed.setImage('attachment://hm6.png');
         word = "";
     }
-    
+
     message.channel.send(exampleEmbed);
 
-    
+
 
 }
 

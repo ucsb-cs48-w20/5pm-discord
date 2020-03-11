@@ -10,7 +10,8 @@ module.exports.run = async (bot, message, args) => {
     }
     filterArgs = args;
     for(i = 0; i < filterArgs.length; i++){
-        filterArgs[i]=filterArgs[i].toLowerCase();
+        arg = filterArgs[i].replace(/"/g, "");
+        filterArgs[i]=arg.toLowerCase();
     }
     var filterMessage = "You're not allowed to say: ";
     if(filterArgs.length==0){
