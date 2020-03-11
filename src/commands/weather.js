@@ -2,59 +2,36 @@ const Discord = require("discord.js");
 const axios = require('axios');
 
 module.exports.run = async (bot, message, args) => {
-        var city = message.content.match(/"(.+?)"/g);
+        var cityArg = message.content.match(/"(.+?)"/g);
+        var city = cityArg.toString();
+        city = city.replace(/"/g, "");
+        city = city.replace(/ /g,"%20");
         if (!city) {
             return message.reply("Please provide a valid city");
         } else {
             const m = await message.channel.send("Getting Weather Data...");
             const weather = axios.create({
                 // Get data from weather API
-                baseURL: "http://api.weatherstack.com/current?access_key=d8a64897527bf6a00aa85eff676f8e6e&query=" + city.trim(),
+                baseURL: "http://api.weatherstack.com/forecast?access_key=bf2f4f25be0ae02e4278f655c079cd1b&query=" + city,
                 headers: {
                     Accept: "application/json"
                 }
             });
             weather.get("/").then(res => {
-                message.channel.send({
-                    embed: {
-                        color: 3447003,
-                        author: {
-                            name: "Current Weather Forecast",
-                            icon_url: "https:" + res.data.current.condition.icon
-                        },
-                        fields: [{
-                            name: "Visible Conditions:",
-                            value: res.data.current.condition.text.toString()
-                        },
-                            {
-                                name: "Temperature:",
-                                value: res.data.current.temp_f.toString()
-                            },
-                            {
-                                name: "Humidity:",
-                                value: res.data.current.humidity.toString()
-                            },
-                            {
-                                name: "Wind Speed (MPH):",
-                                value: res.data.current.wind_mph.toString() + " | " + res.data.current.wind_dir.toString()
-                            },
-                            {
-                                name: "🌡️ High Temperture for today:",
-                                value: res.data.forecast.forecastday[0].day.maxtemp_f.toString()
-                            },
-                            {
-                                name: "❄️ Low Temperture for today:",
-                                value: res.data.forecast.forecastday[0].day.mintemp_f.toString()
-                            }
-
-                        ],
-                        timestamp: new Date(),
-                        footer: {
-                            icon_url: client.user.avatarURL,
-                            text: "© " + message.guild
-                        }
-                    }
-                });
+                console.log(bot.user.avatarURL);
+                var iconUrl = res.data.current.weather_icons.toString().replace(/'/g, "");
+                const weatherEmbed = new Discord.RichEmbed()
+                    .setColor('#db0000')
+                    .setAuthor("Current Weather Forecast", iconUrl)
+                    .addField("Visible Conditions:", res.data.current.weather_descriptions.toString())
+                    .addField("Temperature:", res.data.current.temperature.toString() + '˚C')
+                    .addField("Humidity", res.data.current.humidity.toString() + '%')
+                    .addField("Wind Speed (MPH):", res.data.current.wind_speed.toString() + " | " + res.data.current.wind_dir.toString())
+                    .addField("🌡️ High Temperture for today:", res.data.forecast['2020-03-10'].maxtemp.toString() + '˚C')
+                    .addField("❄️ Low Temperture for today:", res.data.forecast['2020-03-10'].mintemp.toString() + '˚C')
+                    .setTimestamp()
+                    .setFooter('Ora', bot.user.avatarURL);
+                message.channel.send(weatherEmbed);
             })
         }
 }
