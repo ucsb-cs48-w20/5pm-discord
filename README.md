@@ -30,7 +30,7 @@ Once the bot is live on your server you can use the following commands:
 
 | Commands | Author | Description |   
 |----------|--------|-------|
-| ?afk "reason" | Tanay | Set afk status so that Users are notified that you are afk when pinged |
+| ?afk "reason" | Tanay | Set afk status so that Users are notified that you are afk when pinged. |
 | ?purge integer | Tanay | Delete the specified amount of messages sent in the last two weeks |
 | ?poll "question" "option1" "option2" etc. | Tanay | Create a multiple choice poll with provided options |
 | ?poll "question" | Tanay | Create a binary poll |
@@ -43,11 +43,7 @@ Once the bot is live on your server you can use the following commands:
 | ?assign +RoleName | Ron | Users can add a role to their profile |
 | ?assign -RoleName | Ron | Users can remove a role from their profile|
 | ?joke | Ron | Tells the user a joke|
-| ?ban @user | Arjun | Ban a user with a default reason |
 | ?ban @user "reason" | Arjun | Ban a user for a provided reason |
-| ?twitter followUser "twitterHandle" | Arjun | All tweets by followed users are posted in the discord server |
-| ?twitter postTweet "tweet" | Arjun | Posts the tweet on twitter |
-| ?twitter getLastTweet "twitterHandle" | Arjun | The last tweet of the given user is posted in the discord server |
 
 ## Known Problems
 The filter command has no memory of previous arguments, so the only way to add words to the current filter is by calling it again with the same arguments plus the ones to be added.
