@@ -14,11 +14,11 @@ var T = new Twit({
 var followedUsers = []
 
 module.exports.run = async (bot, message, args) => {
-    args = message.content.match(/(?:[^\s"]+|"[^"]*")+/g).slice(1);
+    args = message.content.match(/(?:[^\s"]+|"[^"]*")+/g).slice(1); //regex to parse
     if (args.length != 2) { //check to see if only one user is specified
         return message.channel.send(`${message.author} Please enter a valid command as follows: ?twitter getLastTweet "elonmusk"`);
     }
-    if (args[1] != "followUser" && args[1] != "postTweet" && args[1] != "getLast5Tweets")
+    if (args[1] != "followUser" && args[1] != "postTweet" && args[1] != "getLastTweet")
     if (args[1][0] != '"' || args[1][args[1].length - 1] != '"') { //check ot make sure the user is wrapped in double quotes, i.e. ?twitter "elonmusk"
         return message.channel.send(`${message.author} Please put the user's twitter handle wrapped in double quotes.`);
     }
@@ -27,10 +27,10 @@ module.exports.run = async (bot, message, args) => {
         T.get('statuses/user_timeline', { screen_name: args[1], count: 1 }, function(err, data, response) {
             if (err === undefined) {
                 if (!(followedUsers.includes(data[0].user.id_str))) {
-                    followedUsers.push(data[0].user.id_str);
+                    followedUsers.push(data[0].user.id_str); //get the user id as string for param to stream
                 }
                 var stream = T.stream('statuses/filter',  { follow: followedUsers })
-                stream.on('tweet', function (tweet) {
+                stream.on('tweet', function (tweet) { //stream acts as a webhook, post a tweet when seen
                     const tweetToPost = new Discord.RichEmbed()
                     .setColor('RED')
                     .setDescription(`🕊 ${tweet.user.name} : ${tweet.text} `);
@@ -52,7 +52,7 @@ module.exports.run = async (bot, message, args) => {
     else if (args[0] == "getLastTweet") {
         T.get('statuses/user_timeline', { screen_name: args[1], count: 1 }, function(err, data, response) {
             if (err === undefined) {
-                if (data.length === 0) 
+                if (data.length === 0) //return was empty
                     message.channel.send(`${message.author} This user does not have any tweets :(`)
                 else {
                     const tweetToPost = new Discord.RichEmbed()
