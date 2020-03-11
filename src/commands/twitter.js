@@ -41,6 +41,11 @@ module.exports.run = async (bot, message, args) => {
                 console.log(err);
             }
         })
+    }
+    else if (args[0] == "postTweet") {
+        T.post('statuses/update', { status: args[1] }, function(err, data, response) {
+            (err === undefined) ? message.channel.send(`${message.author} Your tweet has been posted!`) : console.log (err) //provides confirmation after tweet posted
+        })
     }   
 };
 
