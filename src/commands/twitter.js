@@ -12,7 +12,7 @@ var T = new Twit({
   })
 
 module.exports.run = async (bot, message, args) => {
-    followedUsers = [] //only one user can be specified for now
+    followedUsers = []
     args = message.content.match(/(?:[^\s"]+|"[^"]*")+/g).slice(1);
     if (args.length != 2) { //check to see if only one user is specified
         return message.channel.send(`${message.author} Please enter a valid command as follows: ?twitter getLastTweet "elonmusk"`);
@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args) => {
         return message.channel.send(`${message.author} Please put the user's twitter handle wrapped in double quotes.`);
     }
     args[1] = args[1].substring(1, args[1].length - 1); //get rid of quotes
-    if (args[0] == 'followUser') { //if command is to follow a user
+    if (args[0] == 'followUser') {
         T.get('statuses/user_timeline', { screen_name: args[1], count: 1 }, function(err, data, response) {
             if (err === undefined) {
                 console.log(data[0].user.id_str)
@@ -41,12 +41,32 @@ module.exports.run = async (bot, message, args) => {
                 console.log(err);
             }
         })
-    }
+    } 
     else if (args[0] == "postTweet") {
         T.post('statuses/update', { status: args[1] }, function(err, data, response) {
             (err === undefined) ? message.channel.send(`${message.author} Your tweet has been posted!`) : console.log (err) //provides confirmation after tweet posted
         })
-    }   
+    }
+    else if (args[0] == "getLastTweet") {
+        T.get('statuses/user_timeline', { screen_name: args[1], count: 1 }, function(err, data, response) {
+            if (err === undefined) {
+                if (data.length === 0) 
+                    message.channel.send(`${message.author} This user does not have any tweets :(`)
+                else {
+                    const tweetToPost = new Discord.RichEmbed()
+                    .setColor('RED')
+                    .setDescription(`🕊 ${data[0].user.name} : ${data[0].text} `);
+                    message.channel.send({
+                    embed: tweetToPost
+                    })
+                }
+            }
+            else {
+                message.channel.send(`${message.author} This user does not exist. Please enter a valid user as follows: ?twitter getLastTweet "elonmusk"`);
+                console.log (err);
+            }
+        })
+    }
 };
 
 module.exports.help = {
