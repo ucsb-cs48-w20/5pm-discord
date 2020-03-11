@@ -4,6 +4,13 @@ const fs = require("fs");
 let config = require("../botconfig.json");
 var Twit = require('twit');
 
+var T = new Twit({
+    consumer_key:         'FCXWsCq8tTonwN2p3CrUmnzE3',
+    consumer_secret:      'ogSnzSBVN7A44Y3quVm84NdNelilOTiTo40vR3vkqivCTyZkDS',
+    access_token:         '1237635282649763840-fOYbU0A6OX2cDekcI4W1yMWxFhl9ut',
+    access_token_secret:  'NtFwm5Fh87ES38VHnbtffR25n74ekXI2hEE1xTFDUZQt3',
+  })
+
 module.exports.run = async (bot, message, args) => {
     followedUsers = []
     args = message.content.match(/(?:[^\s"]+|"[^"]*")+/g).slice(1);
