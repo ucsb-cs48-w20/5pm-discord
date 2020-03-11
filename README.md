@@ -45,6 +45,7 @@ Once the bot is live on your server you can use the following commands:
 | ?joke | Ron | Tells the user a joke|
 | ?ban @user | Arjun | Ban a user with a default reason |
 | ?ban @user "reason" | Arjun | Ban a user for a provided reason |
+| ?twitter followUser "twitterHandle" | Arjun | Every tweet by a followed user is posted in discord server |
 
 ## Known Problems
 The filter command has no memory of previous arguments, so the only way to add words to the current filter is by calling it again with the same arguments plus the ones to be added.
