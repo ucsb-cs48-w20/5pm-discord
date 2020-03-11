@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args) => {
     if (user) {
         const member = message.guild.member(user);
         if (member) {
-            if(args.length === 0){
+            if(args === null){
                 args = "Unspecified Reason"
             }
             member.kick(args).then(() => {
