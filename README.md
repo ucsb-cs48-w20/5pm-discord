@@ -43,6 +43,7 @@ Once the bot is live on your server you can use the following commands:
 | ?assign +RoleName | Ron | Users can add a role to their profile |
 | ?assign -RoleName | Ron | Users can remove a role from their profile|
 | ?joke | Ron | Tells the user a joke|
+| ?ban @user | Arjun | Ban a user with a default reason |
 | ?ban @user "reason" | Arjun | Ban a user for a provided reason |
 
 ## Known Problems
