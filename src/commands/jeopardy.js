@@ -5,18 +5,16 @@ const {get} = require('snekfetch');
 
 var liveRound = 0;
 var host;
+var playerScores = ["Max", 0]; //very primitive, right now first entry is a tag, subsequent is their score, etc; definitely better ways to do this if i have time
 
 module.exports.run = async (bot, message, args) => {
     if(host == null){
         host = message.author.id;
     }
     if(args == ""){ //Good for now?
-        message.channel.send(host);
         if(liveRound == 0){
-            var players = [];
-            var scores = [];
             liveRound = 1;
-            message.channel.send(`Welcome to Jeopardy, hosted by ${message.author}! Start/stop questions with ?jeopardy resume/pause. View scores with ?jeopardy scores. View rules with ?jeopardy rules. The host can end the round with ?jeopardy end.`);
+            message.channel.send(`Welcome to Jeopardy, hosted by ${message.author}! View rules with ?jeopardy rules.`);
         }
         else if(liveRound == 1){
             message.channel.send(`There is already a live round of Jeopardy.`);
@@ -28,7 +26,7 @@ module.exports.run = async (bot, message, args) => {
         }
         if(liveRound == 1){
             let { answer, question, value, category } = await getQuestion();
-            answer = answer.replace(/<(?:.|\n)*?>/gm, '').toLowerCase();
+            answer = answer.replace(/<(?:.|\n)*?>/gm, '');
             var answered = 0;
             console.log(answer); //for bugtesting, remove before merging to master
 
@@ -38,10 +36,29 @@ module.exports.run = async (bot, message, args) => {
 
             message.channel.send(`The category is ${category.title} for ${value}.`);
             message.channel.send(question);
-            bot.on('message',  async message => { //TODO: Score parsing improvements (optional answers), Score Tracking
-                if(message.content.toLowerCase().includes(answer)&&!message.author.bot&&answered==0){
-                    message.channel.send(`${message.author} is correct and receives $${value}.`);
+            bot.on('message', message => { //TODO: Score parsing improvements (optional answers)
+                var user = message.author.tag;
+                if(message.content.toLowerCase().includes(answer.toLowerCase())&&!message.author.bot&&answered==0){
                     answered = 1;
+                    for(var i = 0; i < playerScores.length; i++){
+                        if(playerScores[i] == user){
+                            playerScores[i+1] += value;
+                        } else {
+                            playerScores.push(user);
+                            playerScores.push(value);
+                        }
+                    }
+                    message.channel.send(`${message.author} is correct and receives $${value}.`);
+                }
+                else{
+                    for(var i = 0; i < playerScores.length; i++){
+                        if(playerScores[i] == user){
+                            playerScores[i+1] -= value;
+                        } else {
+                            playerScores.push(user);
+                            playerScores.push(-1*value);
+                        }
+                    }
                 }
             });
         }
@@ -54,29 +71,23 @@ module.exports.run = async (bot, message, args) => {
             liveRound = 0;
             host = null;
             var maxScore = 0;
-            for(var i = 0; i < scores.length; i++){
-                if(scores[i] > maxScore){
+            for(var i = 1; i < playerScores.length; i+=2){
+                if(playerScores[i] > maxScore){
                     maxScore = i;
                 }
             }
-            message.channel.send(`Jeopardy is over. The winner is ${players[maxScore]} with $${scores[maxScore]}!`)
+            var victoryMessage = "Jeopardy is over. The winner is " + playerScores[maxScore-1] + " with $" + playerScores[maxScore] +"!";
+            message.channel.send(victoryMessage);
         } 
         else{
             message.channel.send(`There isn't a live round of Jeopardy. Start one with ?jeopardy.`);
         }
     }
     if(args == "scores"){
-        printScores();
+        //print score array
     }
     if(args == "rules"){
-        //print rules
-    }
-    if(args == "debug"){
-        var messageD = "round is ";
-        messageD += liveRound;
-        messageD += "host ID is ";
-        messageD += host;
-        message.channel.send(messageD);
+        message.channel.send(`Start/stop questions with ?jeopardy resume/pause. View current scores with ?jeopardy scores. The host or an admin can end the round with ?jeopardy end.`);
     }
 };
 
@@ -92,12 +103,4 @@ async function getQuestion() {
         result = getQuestion();
     }
     return result;
-}
-
-async function printScores() {
-    var scoreMessage = "The scores are:\n";
-    for(var i = 0; i < scores.length; i++){
-        scoreMessage += players[i] + "with $" + scores[i];
-    }
-    message.channel.send(scoreMessage);
 }
