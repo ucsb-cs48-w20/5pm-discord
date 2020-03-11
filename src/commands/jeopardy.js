@@ -4,18 +4,19 @@ const config = require("../botconfig");
 const {get} = require('snekfetch');
 
 var liveRound = 0;
+var host;
 
 module.exports.run = async (bot, message, args) => {
+    if(host == null){
+        host = message.author.id;
+    }
     if(args == ""){ //Good for now?
-        var tempHost = message.author.id;
-        message.channel.send(tempHost); //remove
+        message.channel.send(host);
         if(liveRound == 0){
-            var host = tempHost; //Undefined, why can't it save the id?
             var players = [];
             var scores = [];
             liveRound = 1;
             message.channel.send(`Welcome to Jeopardy, hosted by ${message.author}! Start/stop questions with ?jeopardy resume/pause. View scores with ?jeopardy scores. View rules with ?jeopardy rules. The host can end the round with ?jeopardy end.`);
-
         }
         else if(liveRound == 1){
             message.channel.send(`There is already a live round of Jeopardy.`);
@@ -48,13 +49,10 @@ module.exports.run = async (bot, message, args) => {
     if(args == "pause"){ //finish this
         //pause timer
     }
-    if(args == "reset"){//FOR TESTING, REMOVE BEFORE MASTER MERGE
-        liveRound = 0;
-    }
-    if(args == "end"){ //finish this, bugged pretty hard rn
-        if(message.author.id.toString() == host && liveRound == 1){
-            message.channel.send(message.author.id); //remove
+    if(args == "end"){ //should work once scoring implemented
+        if(message.author.id == host && liveRound == 1){
             liveRound = 0;
+            host = null;
             var maxScore = 0;
             for(var i = 0; i < scores.length; i++){
                 if(scores[i] > maxScore){
@@ -64,7 +62,6 @@ module.exports.run = async (bot, message, args) => {
             message.channel.send(`Jeopardy is over. The winner is ${players[maxScore]} with $${scores[maxScore]}!`)
         } 
         else{
-            message.channel.send(message.author.id); //remove
             message.channel.send(`There isn't a live round of Jeopardy. Start one with ?jeopardy.`);
         }
     }
