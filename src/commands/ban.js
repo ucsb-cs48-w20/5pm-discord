@@ -10,12 +10,14 @@ module.exports.run = async (bot, message, args) => {
     args = message.content.split(' ').slice(1);
     const userToBan = message.mentions.users.first();
     let banReason = args.slice(1).join(' ');
+    banReason = banReason.substring(1, banReason.length - 1);
     
     if (userToBan) {
         if (message.author === userToBan) {
             return message.channel.send(`${message.author} You cannot ban yourself.`);
         }
         else {
+            userToBan.send(banReason);
             if (!banReason) {
                 banReason = "unacceptable behavior"
             }
