@@ -44,6 +44,8 @@ Once the bot is live on your server you can use the following commands:
 | ?assign +RoleName | Ron | Users can add a role to their profile |
 | ?assign -RoleName | Ron | Users can remove a role from their profile|
 | ?joke | Ron | Tells the user a joke|
+| ?hm "new" | Ron | Starts a new game of hangman|
+| ?hm "<letter>" | Ron | Guess a letter in an open game of hangman|
 | ?ban @user "reason" | Arjun | Ban a user for a provided reason |
 | ?ban @user | Arjun | Ban a user for a default reason|
 | ?twitter followUser "twitterHandle" | Arjun | Follows the specified user such that any future tweet will be posted to the discord server|
