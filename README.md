@@ -40,9 +40,18 @@ Once the bot is live on your server you can use the following commands:
 | ?unban | Tanay | Allows the bot to unban a user if the moderator provides the discord UID of the user |
 | ?filter "word" "word2" etc. | Max | Automatically delete messages that contain any filtered words sent after the filter is enabled |
 | ?filter | Max | Disables the filter |
+| ?jeopardy | Max | Starts a round of Jeopardy |
+| ?jeopardy "rules" | Max | Display Jeopardy info and all other Jeopardy-specific commands |
 | ?tempmute @user "time" | Patrick | Temporarily mutes a user for a specified amount of time |
 | ?mute @user | Patrick | Mutes a specified user |
 | ?unmute @user | Patrick | Unmutes a specified user |
+| ?np | Patrick | Sends the songs currently playing in the voice channel |
+| ?pause | Patrick | Pauses the current playing song in the voice channel |
+| ?play "song query" | Patrick | Searchs youtube for the query and allows the user to pick from the top 10 results. Plays selection in the voice channel or adds to the queue |
+| ?queue | Patrick | Returns the list of songs in the queue of songs to be played |
+| ?resume | Patrick | Resumes the song if it was paused |
+| ?volume | Patrick | Sets the volume of the song currently playing |
+| ?clear | Patrick | Clears the queue of songs to be played |
 | ?assign +RoleName | Ron | Users can add a role to their profile |
 | ?assign -RoleName | Ron | Users can remove a role from their profile|
 | ?joke | Ron | Tells the user a joke|
@@ -53,8 +62,7 @@ Once the bot is live on your server you can use the following commands:
 | ?twitter followUser "twitterHandle" | Arjun | Follows the specified user such that any future tweet will be posted to the discord server|
 | ?twitter postTweet "tweet" | Arjun | Posts specified tweet to twitter. |
 | ?twitter getLastTweet "twitterHandle | Arjun | Posts the last tweet by specified user to the discord server |
-| ?jeopardy | Max | Starts a round of Jeopardy |
-| ?jeopardy "rules" | Max | Display Jeopardy info and all other Jeopardy-specific commands |
+
 
 ## Known Problems
 The filter command has no memory of previous arguments, so the only way to add words to the current filter is by calling it again with the same arguments plus the ones to be added.
