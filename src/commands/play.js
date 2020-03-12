@@ -24,11 +24,11 @@ module.exports.run = async (bot, message, args) => {
         var videos = await youtube.searchVideos(message, 10);
         let index = 0;
         message.channel.send(`
-        __**Song selection:**__
+__**Song selection:**__
 
-        ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
+${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
 
-        Please provide a value to select one of the search results ranging from 1-10.
+Please provide a value to select one of the search results ranging from 1-10.
         `);
         try{
             var response = await message.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 11, {
@@ -83,7 +83,6 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 		console.log(serverQueue.songs);
 		if (playlist) return undefined;
 		else return msg.channel.send(`✅ **${song.title}** has been added to the queue!`);
-		return msg.channel.send(`✅ **${song.title}** has been added to the queue!`);
 	}
 	return undefined;
 }
@@ -94,7 +93,7 @@ function play(guild, song) {
 	if (!song) {
 		serverQueue.voiceChannel.leave();
 		queue.delete(guild.id);
-		return;
+		return;	
 	}
 	console.log(serverQueue.songs);
 
