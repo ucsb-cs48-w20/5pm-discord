@@ -1,0 +1,20 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    name: Test
+
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@v1
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: --cwd dashboard install # will run `yarn test` command
+
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: --cwd dashboard test --updateSnapshot # will run `yarn test` command

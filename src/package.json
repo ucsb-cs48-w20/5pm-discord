@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "discord-youtube-api": "^0.1.0",
+    "axios": "^0.19.2",
     "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
@@ -18,7 +19,8 @@
     "ms": "^2.1.2",
     "node-opus": "^0.3.3",
     "simple-youtube-api": "^5.2.1",
-    "winston": "^3.2.1", 
-    "youtube-dl": "^3.0.2"
+    "youtube-dl": "^3.0.2",
+    "twit": "^2.2.11",
+    "winston": "^3.2.1"
   }
 }
