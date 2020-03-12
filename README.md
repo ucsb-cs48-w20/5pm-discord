@@ -49,6 +49,8 @@ Once the bot is live on your server you can use the following commands:
 | ?twitter followUser "twitterHandle" | Arjun | Follows the specified user such that any future tweet will be posted to the discord server|
 | ?twitter postTweet "tweet" | Arjun | Posts specified tweet to twitter. |
 | ?twitter getLastTweet "twitterHandle | Arjun | Posts the last tweet by specified user to the discord server |
+| ?jeopardy | Max | Starts a round of Jeopardy |
+| ?jeopardy "rules" | Max | Display Jeopardy info and all other Jeopardy-specific commands |
 
 ## Known Problems
 The filter command has no memory of previous arguments, so the only way to add words to the current filter is by calling it again with the same arguments plus the ones to be added.
