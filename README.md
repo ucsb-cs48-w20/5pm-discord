@@ -36,6 +36,8 @@ Once the bot is live on your server you can use the following commands:
 | ?poll "question" | Tanay | Create a binary poll |
 | ?kick @user "reason" | Tanay | Kick a user for a provided reason |
 | ?weather "cityName" | Tanay | Posts current and forecast of weather at specified City |
+| ?rps | Tanay | Starts a rock paper scissors game with the bot|
+| ?unban | Tanay | Allows the bot to unban a user if the moderator provides the discord UID of the user |
 | ?filter "word" "word2" etc. | Max | Automatically delete messages that contain any filtered words sent after the filter is enabled |
 | ?filter | Max | Disables the filter |
 | ?tempmute @user "time" | Patrick | Temporarily mutes a user for a specified amount of time |
