@@ -13,6 +13,10 @@ const AdminCommands = [
 
     },
     {
+        title: '?unban [userId] "reason"',
+        content: 'Unban a user (admins only)'
+    },
+    {
         title: '?kick [user]',
         content: 'Kick a user (admins only)'
     },
@@ -33,12 +37,12 @@ const AdminCommands = [
         content: 'Purge a channel (admins only)'
     },
     {
-        title: '?filter [word1] [word2]',
-        content: 'Set banned words to be automatically deleted'
+        title: '?filter "word1" "word2"',
+        content: 'Set banned words to be automatically deleted (admins only)'
     },
     {
         title: '?filter',
-        content: 'Disable the filter'
+        content: 'Disable the filter (admins only)'
     }
 ];
 const UtilityCommands = [
@@ -50,23 +54,32 @@ const UtilityCommands = [
     {
         title: '?assign -[roleName]',
         content: '‏‏‎‎‏‏‎Remove a specified role'
+    },
+    {
+        title: '?twitter followUser "twitterHandle"',
+        content: 'Follows the twitter user and posts future tweet to the discord server'
+    },
+    {
+        title: '?twitter postTweet "tweet"',
+        content: 'Posts specified tweet to twitter account'
+    },
+    {
+        title: '?twitter getLastTweet "twitterHandle',
+        content: 'Posts the last tweet by the twitter user to the discord server'
+    },
+    {
+        title: '?weather "city name"',
+        content: 'Posts current and forecast of weather at specified city'
     }
 ];
 const MusicCommands = [
     {
-        title: '?add [Youtube URL]',
-        content: 'Add a valid youtube link to the queue'
-
-    },
-    {
         title: '?queue',
         content: '‎‎‏‏‎‎‏‏‎Shows the current queue of songs'
-
     },
     {
-        title: '?play',
-        content: 'Play the music queue'
-
+        title: '?play "song query"',
+        content: 'Search youtube for a query and you can choose from the top 10 results'
     },
     {
         title: '?pause',
@@ -77,14 +90,18 @@ const MusicCommands = [
         content: 'Resume the music queue'
     },
     {
-        title: '?skip',
-        content: 'Skip the playing song'
+        title: '?clear',
+        content: 'Clear the music queue'
+    },
+    {
+        title: '?volume',
+        content: 'Set the volume of the songs'
     }
 ];
 const MiscCommands = [
     {
         title: '?poll [question] [option1] [option2]',
-        content: '‎‎‏‏‎‎‏‏‎Create a multiple choice poll with provided options (Up to 24)'
+        content: '‎‎‏‏‎‎‏‏‎Create a multiple choice poll with the provided options (Up to 24)'
 
     },
     {
@@ -94,6 +111,26 @@ const MiscCommands = [
     {
         title: '?afk [reason]',
         content: 'Set afk status with a reason'
+    },
+    {
+        title: '?hm "new',
+        content: 'Starts a new game of hangman'
+    },
+    {
+        title: '?hm [guess]',
+        content: 'Guess a letter for the open game of hangman'
+    },
+    {
+        title: '?rps',
+        content: 'Starts a rock paper scissors game'
+    },
+    {
+        title: '?jeopardy',
+        content: 'Starts a round of Jeopardy'
+    },
+    {
+        title: '?jeopardy "rules"',
+        content: 'Display Jeopardy info and all other Jeopardy-specific commands'
     }
 ];
 
