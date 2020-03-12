@@ -5,13 +5,14 @@ const {get} = require('snekfetch');
 
 var liveRound = 0;
 var host;
-var playerScores = ["Max", 0]; //very primitive, right now first entry is a tag, subsequent is their score, etc; definitely better ways to do this if i have time
+var players = [];
+var scores = [];
 
 module.exports.run = async (bot, message, args) => {
     if(host == null){
         host = message.author.id;
     }
-    if(args == ""){ //Good for now?
+    if(args == ""){ //Good for now
         if(liveRound == 0){
             liveRound = 1;
             message.channel.send(`Welcome to Jeopardy, hosted by ${message.author}! View rules with ?jeopardy rules.`);
@@ -36,28 +37,26 @@ module.exports.run = async (bot, message, args) => {
 
             message.channel.send(`The category is ${category.title} for ${value}.`);
             message.channel.send(question);
-            bot.on('message', message => { //TODO: Score parsing improvements (optional answers)
-                var user = message.author.tag;
-                if(message.content.toLowerCase().includes(answer.toLowerCase())&&!message.author.bot&&answered==0){
+            bot.on('message', message => { //TODO: Score parsing improvements (optional answers), score tracking
+                if(message.content.toLowerCase().includes(answer.toLowerCase())&&!message.author.bot&&answered==0
+                &&message.content.toLowerCase().includes("ora, what" || "ora, who" || "ora, where" || "ora, when"|| "ora, how"|| "ora, why")){
+                    //correct
                     answered = 1;
-                    for(var i = 0; i < playerScores.length; i++){
-                        if(playerScores[i] == user){
-                            playerScores[i+1] += value;
-                        } else {
-                            playerScores.push(user);
-                            playerScores.push(value);
-                        }
-                    }
                     message.channel.send(`${message.author} is correct and receives $${value}.`);
+                    if(playerExists(message.author)==0){
+                        players[Number(message.author.id)] = message.author;
+                        scores[Number(message.author.id)] = value;
+                    } else if(playerExists(message.author)==1){
+                        scores[Number(message.author.id)] += value;
+                    }
                 }
-                else{
-                    for(var i = 0; i < playerScores.length; i++){
-                        if(playerScores[i] == user){
-                            playerScores[i+1] -= value;
-                        } else {
-                            playerScores.push(user);
-                            playerScores.push(-1*value);
-                        }
+                else if(message.content.toLowerCase().includes("ora, what" || "ora, who" || "ora, where" || "ora, when"|| "ora, how"|| "ora, why")){
+                    //incorrect
+                    if(playerExists(message.author)==0){
+                        players[Number(message.author.id)] = message.author;
+                        scores[Number(message.author.id)] = -1*value;
+                    } else if(playerExists(message.author)==1){
+                        scores[Number(message.author.id)] -= value;
                     }
                 }
             });
@@ -66,28 +65,28 @@ module.exports.run = async (bot, message, args) => {
     if(args == "pause"){ //finish this
         //pause timer
     }
-    if(args == "end"){ //should work once scoring implemented
+    if(args == "end"){ //WHAT WORKS: Host check, round check WHAT DOESN'T: Max score search (score array broken?)
         if(message.author.id == host && liveRound == 1){
             liveRound = 0;
             host = null;
-            var maxScore = 0;
-            for(var i = 1; i < playerScores.length; i+=2){
-                if(playerScores[i] > maxScore){
+            var maxScore = -99999; //there's no way someone can score lower than this, right?
+            for(let i = 0; i < scores.length; i++){
+                if(scores[i] > maxScore){
                     maxScore = i;
                 }
             }
-            var victoryMessage = "Jeopardy is over. The winner is " + playerScores[maxScore-1] + " with $" + playerScores[maxScore] +"!";
+            var victoryMessage = "Jeopardy is over. The winner is " + players[maxScore] + " with $" + scores[maxScore] +"!";
             message.channel.send(victoryMessage);
         } 
         else{
             message.channel.send(`There isn't a live round of Jeopardy. Start one with ?jeopardy.`);
         }
     }
-    if(args == "scores"){
-        //print score array
+    if(args == "scores"){ //fix this
+        message.channel.send(scores[Number(message.author.id)]);
     }
     if(args == "rules"){
-        message.channel.send(`Start/stop questions with ?jeopardy resume/pause. View current scores with ?jeopardy scores. The host or an admin can end the round with ?jeopardy end.`);
+        message.channel.send(`Answers must be in the format of "Ora, what is ____." Start/stop questions with ?jeopardy resume/pause. View current scores with ?jeopardy scores. The host or an admin can end the round with ?jeopardy end.`);
     }
 };
 
@@ -99,8 +98,15 @@ async function getQuestion() {
     // fetch question from jservice.io
     const url = 'http://www.jservice.io/api/random';
     let result = JSON.parse((await get(url)).text)[0];
-    if (result.question == 'null') { //just in case the question's bugged, recursively pull one that isn't (DOESNT WORK)
+    if (result.question == 'null' || result.question == '') {
         result = getQuestion();
     }
     return result;
+}
+
+function playerExists(player){ //returns 1 if player is already in players[]
+    if(players[Number(player.id)] == null){
+        return 0;
+    }
+    return 1;
 }
