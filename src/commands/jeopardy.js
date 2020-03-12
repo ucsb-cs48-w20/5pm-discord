@@ -7,25 +7,30 @@ var liveRound = 0;
 var host;
 var players = [];
 var scores = [];
+var playerIds = [];
 
 module.exports.run = async (bot, message, args) => {
+    var argument = args.toString().replace(/"/gm,"");
     if(host == null){
-        host = message.author.id;
+        host = message.author;
     }
-    if(args == ""){ //Good for now
+    if(argument == ""){ //Good for now
         if(liveRound == 0){
             liveRound = 1;
+            players = [];
+            scores = [];
+            playerIds = [];
             message.channel.send(`Welcome to Jeopardy, hosted by ${message.author}! View rules with ?jeopardy rules.`);
         }
         else if(liveRound == 1){
             message.channel.send(`There is already a live round of Jeopardy.`);
         }
     }
-    if(args == "resume"){ //TODO: Timer
+    if(argument == "next"){ //TODO: Timer
         if(liveRound == 0){
             message.channel.send(`There isn't a live round of Jeopardy. Start one with ?jeopardy.`);
         }
-        if(liveRound == 1){
+        if(liveRound == 1 && message.author == host){
             let { answer, question, value, category } = await getQuestion();
             answer = answer.replace(/<(?:.|\n)*?>/gm, '');
             var answered = 0;
@@ -37,56 +42,61 @@ module.exports.run = async (bot, message, args) => {
 
             message.channel.send(`The category is ${category.title} for ${value}.`);
             message.channel.send(question);
-            bot.on('message', message => { //TODO: Score parsing improvements (optional answers), score tracking
-                if(message.content.toLowerCase().includes(answer.toLowerCase())&&!message.author.bot&&answered==0
-                &&message.content.toLowerCase().includes("ora, what" || "ora, who" || "ora, where" || "ora, when"|| "ora, how"|| "ora, why")){
-                    //correct
+            bot.on('message', message => { //TODO: Score parsing improvements (optional answers) and multiple/answers, score tracking, ONLY SEARCH IN CHANNEL
+                if(!message.author.bot&&answered==0&&message.content.toLowerCase().includes(answer.toLowerCase())&&message.content.toLowerCase().includes("ora, w" || "ora, how" || "ora w" || "ora how")){ //won't accept ora w answers atm
+                    //correct, question not answered
                     answered = 1;
-                    message.channel.send(`${message.author} is correct and receives $${value}.`);
+                    message.channel.send(`${message.author} is correct and receives $${value}. ${host} can queue the next question with ?jeopardy next.`);
                     if(playerExists(message.author)==0){
                         players[Number(message.author.id)] = message.author;
                         scores[Number(message.author.id)] = value;
+                        playerIds.push(Number(message.author.id));
                     } else if(playerExists(message.author)==1){
                         scores[Number(message.author.id)] += value;
                     }
-                }
-                else if(message.content.toLowerCase().includes("ora, what" || "ora, who" || "ora, where" || "ora, when"|| "ora, how"|| "ora, why")){
-                    //incorrect
+                } else if(!message.author.bot&&answered==0&&message.content.toLowerCase().includes("ora, w" || "ora, how" || "ora w" || "ora how")&&!message.content.toLowerCase().includes(answer.toLowerCase())){
+                    //incorrect, question not answered
                     if(playerExists(message.author)==0){
                         players[Number(message.author.id)] = message.author;
                         scores[Number(message.author.id)] = -1*value;
+                        playerIds.push(Number(message.author.id));
                     } else if(playerExists(message.author)==1){
                         scores[Number(message.author.id)] -= value;
                     }
+                } else if(!message.author.bot&&answered==1&&message.content.toLowerCase().includes("ora, w" || "ora, how"|| "ora w" || "ora how")){
+                    //question answered (BUGGED)
+                    //message.channel.send(`The question has been answered. ${host} can queue another one with ?jeopardy next.`);
                 }
             });
         }
     }
-    if(args == "pause"){ //finish this
-        //pause timer
-    }
-    if(args == "end"){ //WHAT WORKS: Host check, round check WHAT DOESN'T: Max score search (score array broken?)
-        if(message.author.id == host && liveRound == 1){
+    if(argument == "end") {
+        if(message.author == host && liveRound == 1){
             liveRound = 0;
             host = null;
-            var maxScore = -99999; //there's no way someone can score lower than this, right?
-            for(let i = 0; i < scores.length; i++){
-                if(scores[i] > maxScore){
-                    maxScore = i;
+            var maxScore = -99999;
+            var winner;
+            message.channel.send("Jeopardy is over. The scores are:")
+            for (let index = 0; index < playerIds.length; index++) {
+                message.channel.send(`${players[Number(playerIds[index])]} with $${scores[Number(playerIds[index])]}.`);
+                if(Number(scores[Number(playerIds[index])]) > maxScore) {
+                    maxScore = scores[Number(playerIds[index])];
+                    winner = players[Number(playerIds[index])];
                 }
             }
-            var victoryMessage = "Jeopardy is over. The winner is " + players[maxScore] + " with $" + scores[maxScore] +"!";
-            message.channel.send(victoryMessage);
+            message.channel.send(`The winner is ${winner} with $${maxScore}!`);
         } 
         else{
             message.channel.send(`There isn't a live round of Jeopardy. Start one with ?jeopardy.`);
         }
     }
-    if(args == "scores"){ //fix this
-        message.channel.send(scores[Number(message.author.id)]);
+    if(argument == "scores"){ //fix this
+        for (let index = 0; index < playerIds.length; index++) {
+            message.channel.send(`${players[Number(playerIds[index])]} has $${scores[Number(playerIds[index])]}.`);
+        }
     }
-    if(args == "rules"){
-        message.channel.send(`Answers must be in the format of "Ora, what is ____." Start/stop questions with ?jeopardy resume/pause. View current scores with ?jeopardy scores. The host or an admin can end the round with ?jeopardy end.`);
+    if(argument == "rules"){
+        message.channel.send(`Answers must be in the format of "Ora, what is..." View scores with ?jeopardy scores. The host queues the next question with ?jeopardy next and end the round with ?jeopardy end.`);
     }
 };
 
@@ -98,7 +108,7 @@ async function getQuestion() {
     // fetch question from jservice.io
     const url = 'http://www.jservice.io/api/random';
     let result = JSON.parse((await get(url)).text)[0];
-    if (result.question == 'null' || result.question == '') {
+    if (result.question == 'null' || result.question == '' || result.question == null) { 
         result = getQuestion();
     }
     return result;
