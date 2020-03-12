@@ -16,7 +16,7 @@ module.exports.run = async (bot, message, args) => {
         host = message.author;
         jeopardyChannel = message.channel;
     }
-    if(argument == "" && message.channel == jeopardyChannel){ //Good for now
+    if(argument == "" && message.channel == jeopardyChannel){
         if(liveRound == 0){
             liveRound = 1;
             players = [];
@@ -36,7 +36,7 @@ module.exports.run = async (bot, message, args) => {
             let { answer, question, value, category } = await getQuestion();
             answer = answer.replace(/<(?:.|\n)*?>/gm, '');
             var answered = 0;
-            console.log(answer); //for bugtesting, remove before merging to master
+            console.log(answer); //for making yourself look smarter
 
             if (value == null) {
                 value = 200;
@@ -95,7 +95,7 @@ module.exports.run = async (bot, message, args) => {
             message.channel.send(`There isn't a live round of Jeopardy. Start one with ?jeopardy.`);
         }
     }
-    if(argument == "scores" && message.channel == jeopardyChannel){ //fix this
+    if(argument == "scores" && message.channel == jeopardyChannel){
         for (let index = 0; index < playerIds.length; index++) {
             message.channel.send(`${players[Number(playerIds[index])]} has $${scores[Number(playerIds[index])]}.`);
         }
