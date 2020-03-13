@@ -113,7 +113,7 @@ const MiscCommands = [
         content: 'Set afk status with a reason'
     },
     {
-        title: '?hm "new',
+        title: '?hm "new"',
         content: 'Starts a new game of hangman'
     },
     {
