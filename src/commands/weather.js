@@ -15,7 +15,7 @@ module.exports.run = async (bot, message, args) => {
         const m = await message.channel.send("Getting Weather Data...");
         const weather = axios.create({
             // Get data from weather API
-            baseURL: "http://api.weatherstack.com/forecast?access_key=bf2f4f25be0ae02e4278f655c079cd1b&query=" + city,
+            baseURL: "http://api.weatherstack.com/current?access_key=bf2f4f25be0ae02e4278f655c079cd1b&query=" + city,
             headers: {
                 Accept: "application/json"
             }
@@ -30,14 +30,12 @@ module.exports.run = async (bot, message, args) => {
                 .addField("Temperature:", res.data.current.temperature.toString() + '˚C')
                 .addField("Humidity", res.data.current.humidity.toString() + '%')
                 .addField("Wind Speed (MPH):", res.data.current.wind_speed.toString() + " | " + res.data.current.wind_dir.toString())
-                .addField("🌡️ High Temperture for today:", res.data.forecast['2020-03-10'].maxtemp.toString() + '˚C')
-                .addField("❄️ Low Temperture for today:", res.data.forecast['2020-03-10'].mintemp.toString() + '˚C')
                 .setTimestamp()
                 .setFooter('Ora', bot.user.avatarURL);
             message.channel.send(weatherEmbed);
         })
     }
-}
+};
 
 module.exports.help = {
     name: 'weather'
