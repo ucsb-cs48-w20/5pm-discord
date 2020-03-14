@@ -29,7 +29,7 @@ const AdminCommands = [
         content: 'Unmute a user (admins only)'
     },
     {
-        title: '?tempmute [user]',
+        title: '?tempmute [user] [time]',
         content: 'Temporarily mute a user (admins only)'
     },
     {
@@ -64,7 +64,7 @@ const UtilityCommands = [
         content: 'Posts specified tweet to twitter account'
     },
     {
-        title: '?twitter getLastTweet "twitterHandle',
+        title: '?twitter getLastTweet "twitterHandle"',
         content: 'Posts the last tweet by the twitter user to the discord server'
     },
     {
