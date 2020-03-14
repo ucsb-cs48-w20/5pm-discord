@@ -109,6 +109,10 @@ const MiscCommands = [
         content: 'Create a binary poll'
     },
     {
+        title: '?joke',
+        content: 'Ask for a joke'
+    },
+    {
         title: '?afk [reason]',
         content: 'Set afk status with a reason'
     },
