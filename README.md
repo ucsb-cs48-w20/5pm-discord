@@ -7,6 +7,10 @@ Does your Discord Server suck? This bot makes it a whole better. We offer a suit
 ### Additional Info
 This Discord bot is targeted at Discord powerusers and moderators seeking ways to ease moderation and/or add some fun commands to the server. The main functionality of the bot is the suite of moderation tools which automate existing Discord functionality or add new tools entirely.
 
+Checkout our website!
+
+https://oradiscord.netlify.com/
+
 ## Installation
 
 ### Prerequisites
