@@ -18,10 +18,13 @@ Yarn, React, NodeJS, a Discord Account, and Discord itself.
 NodeJS, DiscordJS, React.
 
 ### Installation Steps
-Clone this repository (Branch: Master). Go to https://discordapp.com/developers/applications/ and create an application. This will provide a bot token you must place into a token.json file in the src directory. The file must be formatted as follows:
+Clone this repository (Branch: Master). Go to https://discordapp.com/developers/applications/ and create an application. This will provide a bot token you must place into a token.json file in the src directory. You will also need a Google API key which can be obtained from the following site: https://developers.google.com/youtube/v3/getting-started. 
+
+The file must be formatted as follows:
 
 `{
-"value":"Insert Token Here"
+"value":"Insert Token Here",
+"googleKey":"Insert Google API Key Here"
 }`
 
 You can then run this application with `node index.js`in the src directory.
