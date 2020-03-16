@@ -24,7 +24,9 @@ Clone this repository (Branch: Master). Go to https://discordapp.com/developers/
 "value":"Insert Token Here"
 }`
 
-You can then run this application with `node index.js`
+You can then run this application with `node index.js`in the src directory.
+
+You can run the website with `yarn start` in the dashboard directory.
 
 ## Functionality
 
